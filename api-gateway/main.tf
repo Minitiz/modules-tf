@@ -19,6 +19,15 @@ resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.api.id
   name        = "default"
   auto_deploy = true
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.default.arn
+    format          = "..."
+  }
+}
+
+resource "aws_cloudwatch_log_group" "default" {
+  name              = "/aws/lambda/${var.gateway_name}/default"
+  retention_in_days = 14
 }
 
 resource "aws_apigatewayv2_authorizer" "auth0" {
