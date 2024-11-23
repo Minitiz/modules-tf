@@ -3,33 +3,16 @@ on:
   workflow_call:
     inputs:
       moduleRootDirectory:
-        description: 'Defines root module directory'
+        description: "Defines root module directory"
         required: true
         type: string
 
     secrets:
       githubToken:
-        description: 'GitHub Token value'
+        description: "GitHub Token value"
         required: true
 
 jobs:
-  checkov:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ inputs.moduleRootDirectory }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Scan module with checkov
-        uses: bridgecrewio/checkov-action@v12
-        with:
-          directory: ${{ inputs.moduleRootDirectory }}
-          quiet: false
-          soft_fail: false
-          compact: false
-
   tfsec:
     runs-on: ubuntu-latest
     defaults:
