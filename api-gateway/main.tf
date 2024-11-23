@@ -1,4 +1,3 @@
-
 locals {}
 
 resource "aws_apigatewayv2_api" "api" {
@@ -28,7 +27,19 @@ resource "aws_apigatewayv2_stage" "default" {
 resource "aws_cloudwatch_log_group" "default" {
   name              = "/aws/lambda/${var.gateway_name}/default"
   retention_in_days = 14
+  kms_key_id        = aws_kms_key.log_group.arn
 }
+
+resource "aws_kms_key" "log_group" {
+  enable_key_rotation = true
+  description         = "KMS key for CloudWatch Log Group encryption"
+}
+
+resource "aws_kms_alias" "log_group" {
+  name          = "alias/${var.gateway_name}-cloudwatch-log-group"
+  target_key_id = aws_kms_key.log_group.id
+}
+
 
 resource "aws_apigatewayv2_authorizer" "auth0" {
   api_id          = aws_apigatewayv2_api.api.id
