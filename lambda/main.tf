@@ -58,13 +58,15 @@ resource "aws_iam_role_policy" "lambda_basic_execution" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ]
-        Resource = "*"
+        Resource = "arn:aws:logs:${data.aws_region.current_region.name}:${data.aws_caller_identity.current_account.account_id}:log-group:/aws/lambda/${var.lambda_name}*"
       }
     ]
   })
 }
 
-resource "aws_kms_key" "log_group_key" {}
+resource "aws_kms_key" "log_group_key" {
+  enable_key_rotation = true
+}
 
 resource "aws_kms_key_policy" "log_group_key_policy" {
   key_id = aws_kms_key.log_group_key.id
