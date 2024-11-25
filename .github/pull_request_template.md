@@ -1,5 +1,3 @@
-<!-- Describe your Pull Request here, as normal :) -->
-
 ## Description
 
 <!-- Please include a summary of the change and which issue is fixed. -->
@@ -24,3 +22,7 @@
 - [ ] New and existing unit tests pass locally with my changes
 
 ## Changelog entry
+
+```
+
+```
