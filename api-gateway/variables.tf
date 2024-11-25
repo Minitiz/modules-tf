@@ -10,10 +10,7 @@ variable "protocol_type" {
 }
 
 variable "routes" {
-  type = list(object({
-    route_key = string
-    target    = string
-  }))
+  type        = list(string)
   description = "List of routes to create in the API Gateway"
 }
 
@@ -25,4 +22,14 @@ variable "auth0_issuer" {
 variable "auth0_audience" {
   type        = string
   description = "Auth0 API audience identifier"
+}
+
+variable "lambda_invoke_arn" {
+  type        = string
+  description = "value of the lambda invoke arn"
+}
+
+variable "function_name" {
+  type        = string
+  description = "value of the function name"
 }
