@@ -36,6 +36,9 @@ resource "aws_lambda_function" "lambda" {
   architectures    = var.lambda_architectures
   filename         = var.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
+  tracing_config {
+    mode = "Active"
+  }
 }
 
 
