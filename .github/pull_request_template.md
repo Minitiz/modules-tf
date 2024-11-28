@@ -24,5 +24,5 @@
 ## Changelog entry
 
 ```
-
+[Copilot is generating a summary...]
 ```
